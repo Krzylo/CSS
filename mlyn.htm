@@ -1,0 +1,478 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html" />
+	<meta name="author" content="Krzysztof Zamojski" />
+    <meta charset="utf-8" />
+    
+	<title>Młyn - Śrutownik</title>
+    <style>
+    body{
+        background-color: lightgreen;
+    }
+    #perspektywa, #rodzic, #rodzic_staly, .kamien-staly-wyglad, .kamien-ruchomy-gora, #kosz, .kosz_boki
+    {
+   	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    }
+      #perspektywa {
+        /*transform:scale(0.5, 0.5);*/
+        width:120px;
+        height:60px;
+        margin:250px auto;
+        perspective:1200px;
+        -webkit-perspective:1200px;
+        -moz-perspective:1200px;
+        -o-perspective:1200px;
+        -ms-perspective:1200px;
+      }
+
+      #rodzic {
+        transform: rotateX(-7deg);
+        -webkit-transform: rotateX(-7deg);
+        -moz-transform: rotateX(-7deg);
+        -o-transform: rotateX(-7deg);
+        -ms-transform: rotateX(-7deg);
+        
+        animation:obrot 6s linear infinite;
+        -webkit-animation:obrot 6s linear infinite;
+        -moz-animation:obrot 6s linear infinite;
+        -o-animation:obrot 6s linear infinite;
+        -ms-animation:obrot 6s linear infinite;
+      }
+      
+      #rodzic_staly {
+        transform:translateY(60px) rotateX(-7deg);
+        -webkit-transform:translateY(60px) rotateX(-7deg);
+        -o-transform:translateY(60px) rotateX(-7deg);
+        -moz-transform:translateY(60px) rotateX(-7deg);
+        -ms-transform:translateY(60px) rotateX(-7deg);
+      }
+      #ziarno{
+        width:15px;
+        height:40px;
+        position: absolute;
+        transform: translate(52px,-30px);
+        background-image:url('./img/ziarno1.png'),
+                   url('./img/ziarno2.png'),
+                   url('./img/ziarno3.png');
+        animation:ziarno_syp 100s linear infinite normal;
+      }
+      #maka{
+        width:30px;
+        height:80px;
+        border-top-right-radius: 50%;
+        position: absolute;
+        transform: translate(220px,70px);
+        background-image:url('./img/maka1.png'),
+                   url('./img/maka2.png'),
+                   url('./img/maka3.png');
+        animation:maka_syp 100s linear infinite normal;
+      }
+      
+      #kosz{
+        transform: rotateX(-15deg);
+        -webkit-transform: rotateX(-15deg);
+        -moz-transform: rotateX(-7deg);
+        -o-transform: rotateX(-7deg);
+        -ms-transform: rotateX(-7deg);
+        background-color: #ff0000;        
+      }
+      #kosz > .kosz_boki{
+        position:absolute;  
+       	width: 15px;
+    	height: 0;
+    	border-left: 92px solid transparent;
+    	border-right: 92px solid transparent;
+    	border-top: 200px solid #555;
+        opacity:0.5;        
+      }
+      
+      #kosz > div:nth-child(1){
+       	-webkit-transform: translate3d(-40px,-220px, 53px) rotateX(-28deg);
+    	-moz-transform: translate3d(-40px,-220px, 53px) rotateX(-28deg);
+    	-o-transform: translate3d(-40px,-220px, 53px) rotateX(-28deg);
+    	-ms-transform: translate3d(-40px,-220px, 53px) rotateX(-28deg);
+    	transform: translate3d(-40px,-220px, 53px) rotateX(-28deg);
+    }
+    #kosz > div:nth-child(2){
+       	-webkit-transform: translate(-92px,-220px) rotateY(90deg) rotateX(28deg);
+    	-moz-transform: translate(-92px,-220px) rotateY(90deg) rotateX(-28deg);
+    	-o-transform: translate(-92px,-220px) rotateY(90deg) rotateX(-28deg);
+    	-ms-transform: translate(-92px,-220px) rotateY(90deg) rotateX(-28deg);
+    	transform: translate(-92px,-220px) rotateY(90deg) rotateX(28deg);
+    }
+    #kosz > div:nth-child(3){
+       	-webkit-transform: translate3d(-40px,-220px, -53px) rotateX(28deg);
+    	-moz-transform: translate3d(-40px,-220px, -53px) rotateX(-28deg);
+    	-o-transform: translate3d(-40px,-220px -53px) rotateX(-28deg);
+    	-ms-transform: translate3d(-40px,-220px -53px) rotateX(-28deg);
+    	transform: translate3d(-40px,-220px,-53px) rotateX(28deg);
+    }
+    #kosz > div:nth-child(4){
+       	-webkit-transform: translate(12px,-220px) rotateY(90deg) rotateX(-28deg);
+    	-moz-transform: translate(12px,-220px) rotateY(90deg) rotateX(-28deg);
+    	-o-transform: translate(12px,-220px) rotateY(90deg) rotateX(-28deg);
+    	-ms-transform: translate(12px,-220px) rotateY(90deg) rotateX(-28deg);
+    	transform: translate(12px,-220px) rotateY(90deg) rotateX(-28deg);
+    }
+
+      #rodzic > div, #rodzic_staly > div{
+        position:absolute;
+        width:118px;
+        height:58px;
+        border:1px solid #000;
+        background-color:rgba(255,255,255,0.5);
+        background-image:radial-gradient(ellipse at top left,transparent,#00F);
+        box-shadow:0 0 4px #00F;
+      }
+    #rodzic > .kamien-ruchomy-wnetrze {
+        /*display: none;*/
+    }
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad {
+        width:28px;
+        height:58px;
+        border:1px solid #000;
+        background-color:rgba(255,255,255,0.5);
+        background-image:radial-gradient(ellipse at top left,transparent,#00F);
+        box-shadow:0 0 4px #00F;        
+    }
+    #rodzic > .kamien-ruchomy-gora{
+        width: 28px;
+        height: 0;
+        border-left: 45px solid transparent;
+        border-right: 45px solid transparent;
+        border-bottom: 125px solid #00F;
+        position: absolute;
+        /*background-color: #00F;*/
+        opacity: 0.7   
+    }      
+    #rodzic_staly .kamien-staly-wyglad { 
+        width: 0;
+        height: 0;
+        border-left: 59px solid transparent;
+        border-right: 59px solid transparent;
+        border-bottom: 164px solid #00F;
+        position: absolute;
+        background-color: #00F;
+        opacity: 0.3;
+    }
+    /* Kamień ruchomy góra*/
+    #rodzic > div:nth-child(19){
+       	-webkit-transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 100px, 62px);
+    	-moz-transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 100px, 62px);
+    	-o-transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 100px, 62px);
+    	-ms-transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 100px, 62px);
+    	transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 100px, 62px);
+    }
+    #rodzic > div:nth-child(20){
+       	-webkit-transform: rotateX(90deg) rotateZ(40deg) translate3d(0px, 100px, 62px);
+    	-moz-transform: rotateX(90deg) rotateZ(40deg) translate3d(0px, 100px, 62px);
+    	-o-transform: rotateX(90deg) rotateZ(40deg) translate3d(0px, 100px, 62px);
+    	-ms-transform: rotateX(90deg) rotateZ(40deg) translate3d(0px, 100px, 62px);
+    	transform: rotateX(90deg) rotateZ(40deg) translate3d(0px, 100px, 62px);
+    }
+    #rodzic > div:nth-child(21){
+       	-webkit-transform: rotateX(90deg) rotateZ(80deg) translate3d(0px, 100px, 62px);
+    	-moz-transform: rotateX(90deg) rotateZ(80deg) translate3d(0px, 100px, 62px);
+    	-o-transform: rotateX(90deg) rotateZ(80deg) translate3d(0px, 100px, 62px);
+    	-ms-transform: rotateX(90deg) rotateZ(80deg) translate3d(0px, 100px, 62px);
+    	transform: rotateX(90deg) rotateZ(80deg) translate3d(0px, 100px, 62px);
+    }
+    #rodzic > div:nth-child(22){
+       	-webkit-transform: rotateX(90deg) rotateZ(120deg) translate3d(0px, 100px, 62px);
+    	-moz-transform: rotateX(90deg) rotateZ(120deg) translate3d(0px, 100px, 62px);
+    	-o-transform: rotateX(90deg) rotateZ(120deg) translate3d(0px, 100px, 62px);
+    	-ms-transform: rotateX(90deg) rotateZ(120deg) translate3d(0px, 100px, 62px);
+    	transform: rotateX(90deg) rotateZ(120deg) translate3d(0px, 100px, 62px);
+    }
+    #rodzic > div:nth-child(23){
+       	-webkit-transform: rotateX(90deg) rotateZ(160deg) translate3d(0px, 100px, 62px);
+    	-moz-transform: rotateX(90deg) rotateZ(160deg) translate3d(0px, 100px, 62px);
+    	-o-transform: rotateX(90deg) rotateZ(160deg) translate3d(0px, 100px, 62px);
+    	-ms-transform: rotateX(90deg) rotateZ(160deg) translate3d(0px, 100px, 62px);
+    	transform: rotateX(90deg) rotateZ(160deg) translate3d(0px, 100px, 62px);
+    }
+    #rodzic > div:nth-child(24){
+       	-webkit-transform: rotateX(90deg) rotateZ(200deg) translate3d(0px, 100px, 62px);
+    	-moz-transform: rotateX(90deg) rotateZ(200deg) translate3d(0px, 100px, 62px);
+    	-o-transform: rotateX(90deg) rotateZ(200deg) translate3d(0px, 100px, 62px);
+    	-ms-transform: rotateX(90deg) rotateZ(200deg) translate3d(0px, 100px, 62px);
+    	transform: rotateX(90deg) rotateZ(200deg) translate3d(0px, 100px, 62px);
+    }
+    #rodzic > div:nth-child(25){
+       	-webkit-transform: rotateX(90deg) rotateZ(240deg) translate3d(0px, 100px, 62px);
+    	-moz-transform: rotateX(90deg) rotateZ(240deg) translate3d(0px, 100px, 62px);
+    	-o-transform: rotateX(90deg) rotateZ(240deg) translate3d(0px, 100px, 62px);
+    	-ms-transform: rotateX(90deg) rotateZ(240deg) translate3d(0px, 100px, 62px);
+    	transform: rotateX(90deg) rotateZ(240deg) translate3d(0px, 100px, 62px);
+    }
+    #rodzic > div:nth-child(26){
+       	-webkit-transform: rotateX(90deg) rotateZ(280deg) translate3d(0px, 100px, 62px);
+    	-moz-transform: rotateX(90deg) rotateZ(280deg) translate3d(0px, 100px, 62px);
+    	-o-transform: rotateX(90deg) rotateZ(280deg) translate3d(0px, 100px, 62px);
+    	-ms-transform: rotateX(90deg) rotateZ(280deg) translate3d(0px, 100px, 62px);
+    	transform: rotateX(90deg) rotateZ(280deg) translate3d(0px, 100px, 62px);
+    }
+    #rodzic > div:nth-child(27){
+       	-webkit-transform: rotateX(90deg) rotateZ(30deg) translate3d(0px, 100px, 62px);
+    	-moz-transform: rotateX(90deg) rotateZ(320deg) translate3d(0px, 100px, 62px);
+    	-o-transform: rotateX(90deg) rotateZ(320deg) translate3d(0px, 100px, 62px);
+    	-ms-transform: rotateX(90deg) rotateZ(320deg) translate3d(0px, 100px, 62px);
+    	transform: rotateX(90deg) rotateZ(320deg) translate3d(0px, 100px, 62px);
+    }
+    /**/
+    
+    #rodzic_staly > div:nth-child(10){
+       	-webkit-transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 29px, 75px);
+    	-moz-transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 29px, 75px);
+    	-o-transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 29px, 75px);
+    	-ms-transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 29px, 75px);
+    	transform: rotateX(90deg) rotateZ(0deg) translate3d(0px, 29px, 75px);
+    }
+    #rodzic_staly > div:nth-child(11){
+       	-webkit-transform: rotateX(90deg) rotateZ(40deg) translate3d(-34px, 41px, 75px);
+    	-moz-transform: rotateX(90deg) rotateZ(40deg) translate3d(-34px, 41px, 75px);
+    	-o-transform: rotateX(90deg) rotateZ(40deg) translate3d(-34px, 41px, 75px);
+    	-ms-transform: rotateX(90deg) rotateZ(40deg) translate3d(-34px, 41px, 75px);
+    	transform: rotateX(90deg) rotateZ(40deg) translate3d(-34px, 41px, 75px);
+    }
+    #rodzic_staly > div:nth-child(12){
+       	-webkit-transform: rotateX(90deg) rotateZ(80deg) translate3d(-52px, 72px, 75px);
+    	-moz-transform: rotateX(90deg) rotateZ(80deg) translate3d(-52px, 72px, 75px);
+    	-o-transform: rotateX(90deg) rotateZ(80deg) translate3d(-52px, 72px, 75px);
+    	-ms-transform: rotateX(90deg) rotateZ(80deg) translate3d(-52px, 72px, 75px);
+    	transform: rotateX(90deg) rotateZ(80deg) translate3d(-52px, 72px, 75px);
+    }
+    #rodzic_staly > div:nth-child(13){
+       	-webkit-transform: rotateX(90deg) rotateZ(120deg) translate3d(-46px, 107px, 75px);
+    	-moz-transform: rotateX(90deg) rotateZ(120deg) translate3d(-46px, 107px, 75px);
+    	-o-transform: rotateX(90deg) rotateZ(120deg) translate3d(-46px, 107px, 75px);
+    	-ms-transform: rotateX(90deg) rotateZ(120deg) translate3d(-46px, 107px, 75px);
+    	transform: rotateX(90deg) rotateZ(120deg) translate3d(-46px, 107px, 75px);
+    }
+    #rodzic_staly > div:nth-child(14){
+       	-webkit-transform: rotateX(90deg) rotateZ(160deg) translate3d(-19px, 130px, 75px);
+    	-moz-transform: rotateX(90deg) rotateZ(160deg) translate3d(-19px, 130px, 75px);
+    	-o-transform: rotateX(90deg) rotateZ(160deg) translate3d(-19px, 130px, 75px);
+    	-ms-transform: rotateX(90deg) rotateZ(160deg) translate3d(-19px, 130px, 75px);
+    	transform: rotateX(90deg) rotateZ(160deg) translate3d(-19px, 130px, 75px);
+    }
+    #rodzic_staly > div:nth-child(15){
+       	-webkit-transform: rotateX(90deg) rotateZ(200deg) translate3d(16px, 130px, 75px);
+    	-moz-transform: rotateX(90deg) rotateZ(200deg) translate3d(16px, 130px, 75px);
+    	-o-transform: rotateX(90deg) rotateZ(200deg) translate3d(16px, 130px, 75px);
+    	-ms-transform: rotateX(90deg) rotateZ(200deg) translate3d(16px, 130px, 75px);
+    	transform: rotateX(90deg) rotateZ(200deg) translate3d(16px, 130px, 75px);
+    }
+    #rodzic_staly > div:nth-child(16){
+       	-webkit-transform: rotateX(90deg) rotateZ(240deg) translate3d(43px, 107px, 75px);
+    	-moz-transform: rotateX(90deg) rotateZ(240deg) translate3d(43px, 107px, 75px);
+    	-o-transform: rotateX(90deg) rotateZ(240deg) translate3d(43px, 107px, 75px);
+    	-ms-transform: rotateX(90deg) rotateZ(240deg) translate3d(43px, 107px, 75px);
+    	transform: rotateX(90deg) rotateZ(240deg) translate3d(43px, 107px, 75px);
+    }
+    #rodzic_staly > div:nth-child(17){
+       	-webkit-transform: rotateX(90deg) rotateZ(280deg) translate3d(49px, 73px, 75px);
+    	-moz-transform: rotateX(90deg) rotateZ(280deg) translate3d(49px, 73px, 75px);
+    	-o-transform: rotateX(90deg) rotateZ(280deg) translate3d(49px, 73px, 75px);
+    	-ms-transform: rotateX(90deg) rotateZ(280deg) translate3d(49px, 73px, 75px);
+    	transform: rotateX(90deg) rotateZ(280deg) translate3d(49px, 73px, 75px);
+    }
+    #rodzic_staly > div:nth-child(18){
+       	-webkit-transform: rotateX(90deg) rotateZ(320deg) translate3d(32px, 42px, 75px);
+    	-moz-transform: rotateX(90deg) rotateZ(320deg) translate3d(32px, 42px, 75px);
+    	-o-transform: rotateX(90deg) rotateZ(320deg) translate3d(32px, 42px, 75px);
+    	-ms-transform: rotateX(90deg) rotateZ(320deg) translate3d(32px, 42px, 75px);
+    	transform: rotateX(90deg) rotateZ(320deg) translate3d(32px, 42px, 75px);
+    }
+
+    #rodzic > div:nth-child(1), #rodzic_staly > div:nth-child(1) {
+        transform:rotateY(0) translateZ(164px);
+        -webkit-transform:rotateY(0) translateZ(164px);
+      }
+
+    #rodzic > div:nth-child(2), #rodzic_staly > div:nth-child(2) {
+        transform:rotateY(40deg) translateZ(164px);
+        -webkit-transform:rotateY(40deg) translateZ(164px);
+      }
+
+    #rodzic > div:nth-child(3), #rodzic_staly > div:nth-child(3) {
+        transform:rotateY(80deg) translateZ(164px);
+        -webkit-transform:rotateY(80deg) translateZ(164px);
+      }
+
+    #rodzic > div:nth-child(4), #rodzic_staly > div:nth-child(4) {
+        transform:rotateY(120deg) translateZ(164px);
+        -webkit-transform:rotateY(120deg) translateZ(164px);
+      }
+
+    #rodzic > div:nth-child(5), #rodzic_staly > div:nth-child(5) {
+        transform:rotateY(160deg) translateZ(164px);
+        -webkit-transform:rotateY(160deg) translateZ(164px);
+      }
+
+    #rodzic > div:nth-child(6), #rodzic_staly > div:nth-child(6) {
+        transform:rotateY(200deg) translateZ(164px);
+        -webkit-transform:rotateY(200deg) translateZ(164px);
+      }
+
+    #rodzic > div:nth-child(7), #rodzic_staly > div:nth-child(7) {
+        transform:rotateY(240deg) translateZ(164px);
+        -webkit-transform:rotateY(240deg) translateZ(164px);
+      }
+
+    #rodzic > div:nth-child(8), #rodzic_staly > div:nth-child(8) {
+        transform:rotateY(280deg) translateZ(164px);
+        -webkit-transform:rotateY(280deg) translateZ(164px);
+      }
+
+    #rodzic > div:nth-child(9), #rodzic_staly > div:nth-child(9) {
+        transform:rotateY(320deg) translateZ(164px);
+        -webkit-transform:rotateY(320deg) translateZ(164px);
+      }
+      /*Kamień ruchomy wewnętrzne*/
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad:nth-child(10) {
+        transform:translateX(45px) rotateY(0deg) translateZ(41px) ;
+        -webkit-transform:translateX(45px) rotateY(0deg) translateZ(41px) ;
+      }      
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad:nth-child(11) {
+        transform:translateX(45px) rotateY(40deg) translateZ(41px) ;
+        -webkit-transform:translateX(45px) rotateY(40deg) translateZ(41px) ;
+      }      
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad:nth-child(12) {
+        transform:translateX(45px) rotateY(80deg) translateZ(41px) ;
+        -webkit-transform: translateX(45px) rotateY(80deg) translateZ(41px);
+      }
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad:nth-child(13) {
+        transform: translateX(45px) rotateY(120deg) translateZ(41px);
+        -webkit-transform:translateX(45px) rotateY(120deg) translateZ(41px) ;
+      }
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad:nth-child(14) {
+        transform:translateX(45px) rotateY(160deg) translateZ(41px) ;
+        -webkit-transform: translateX(45px) rotateY(160deg) translateZ(41px);
+      }
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad:nth-child(15) {
+        transform:translateX(45px) rotateY(200deg) translateZ(41px) ;
+        -webkit-transform:translateX(45px) rotateY(200deg) translateZ(41px) ;
+      }
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad:nth-child(16) {
+        transform:translateX(45px) rotateY(240deg) translateZ(41px) ;
+        -webkit-transform:translateX(45px) rotateY(240deg) translateZ(41px) ;
+      }
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad:nth-child(17) {
+        transform:translateX(45px) rotateY(280deg) translateZ(41px) ;
+        -webkit-transform:translateX(45px) rotateY(280deg) translateZ(41px) ;
+      }
+    #rodzic > .kamien-ruchomy-wnetrze-wyglad:nth-child(18) {
+        transform:translateX(45px) rotateY(320deg) translateZ(41px) ;
+        -webkit-transform:translateX(45px) rotateY(320deg) translateZ(41px) ;
+      }
+
+      @keyframes obrot
+      {
+        0% { transform:rotateX(-7deg) rotateY(0); }
+        100% { transform:rotateX(-7deg) rotateY(-360deg); }
+      }
+
+      @-webkit-keyframes obrot
+      {
+        0% { -webkit-transform:rotateX(-7deg) rotateY(0); }
+        100% { -webkit-transform:rotateX(-7deg) rotateY(-360deg); }
+      }
+            @keyframes ziarno_syp
+      {
+        0% {background-position:0 0, 0 0, 0 0;}
+        100% {background-position: 0 10000px,0 7500px ,0 5000px ;}
+      }
+
+      /* dla Google Chrome, Safari, Opera 15+ */
+      @-webkit-keyframes ziarno_syp
+      {
+        0% {background-position:0 0, 0 0, 0 0;}
+        100% {background-position:0 10000px ,0 7500px ,0 5000px ;}
+      }
+      @keyframes maka_syp
+      {
+        0% {background-position:0 0, 0 0, 0 0;}
+        100% {background-position: 0 7500px,0 5000px ,0 2500px ;}
+      }
+
+      /* dla Google Chrome, Safari, Opera 15+ */
+      @-webkit-keyframes maka_syp
+      {
+        0% {background-position:0 0, 0 0, 0 0;}
+        100% {background-position:0 7500px ,0 5000px ,0 2500px ;}
+      }
+
+    </style>
+  </head>
+
+<body>
+    <div id="perspektywa">
+        <div id="kosz">
+            <div class="kosz_boki"></div>
+            <div class="kosz_boki"></div>
+            <div class="kosz_boki"></div>
+            <div class="kosz_boki"></div>
+        </div><!-- END KOSZ -->
+        <div id="ziarno"></div>
+        <div id="maka"></div>
+    
+    <div id="rodzic">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    			<div class="kamien-ruchomy-wnetrze-wyglad"></div>
+    			<div class="kamien-ruchomy-wnetrze-wyglad"></div>
+    			<div class="kamien-ruchomy-wnetrze-wyglad"></div>
+    			<div class="kamien-ruchomy-wnetrze-wyglad"></div>
+    			<div class="kamien-ruchomy-wnetrze-wyglad"></div>
+    			<div class="kamien-ruchomy-wnetrze-wyglad"></div>
+    			<div class="kamien-ruchomy-wnetrze-wyglad"></div>
+    			<div class="kamien-ruchomy-wnetrze-wyglad"></div>
+    			<div class="kamien-ruchomy-wnetrze-wyglad"></div>
+                    <div class="kamien-ruchomy-gora"></div>
+                    <div class="kamien-ruchomy-gora"></div>
+                    <div class="kamien-ruchomy-gora"></div>
+                    <div class="kamien-ruchomy-gora"></div>
+                    <div class="kamien-ruchomy-gora"></div>
+                    <div class="kamien-ruchomy-gora"></div>
+                    <div class="kamien-ruchomy-gora"></div>
+                    <div class="kamien-ruchomy-gora"></div>
+                    <div class="kamien-ruchomy-gora"></div>
+
+      </div> <!-- END rodzic -->
+      <div id="rodzic_staly">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    		<div class="kamien-staly-wyglad"></div>
+    		<div class="kamien-staly-wyglad"></div>
+    		<div class="kamien-staly-wyglad"></div>
+    		<div class="kamien-staly-wyglad"></div>
+    		<div class="kamien-staly-wyglad"></div>
+    		<div class="kamien-staly-wyglad"></div>
+    		<div class="kamien-staly-wyglad"></div>
+    		<div class="kamien-staly-wyglad"></div>
+    		<div class="kamien-staly-wyglad"></div>
+
+      </div> <!-- END rodzic_stały -->
+    </div> <!-- END Perspektywa -->
+</body>
+</html>
